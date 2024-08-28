@@ -10,7 +10,7 @@ return(
 <div>
       {/* Navbar */}
       <Navbar/>
-
+<h1>Hola esto es una prueba</h1>
       {/* Sección de imagen de fondo */}
       <div
         className="w-full"
