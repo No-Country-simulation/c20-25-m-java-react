@@ -31,7 +31,11 @@ const Home = () => {
             <p className="text-lg text-gray-700 mb-6">
               Nuestro esfuerzo puede mejorar el medio ambiente y crear un futuro más verde para todos. Cada árbol cuenta y tú también puedes ser parte del cambio.
             </p>
-            <Button>Planta tu Arbol</Button>
+            <Button>
+
+           Planta tu Arbol
+
+         </Button>
           </div>
         </div>
       </div>
