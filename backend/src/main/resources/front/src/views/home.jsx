@@ -36,7 +36,9 @@ const Home = () => {
             
             </p>
             <Button>
-          Planta tu Arbol
+
+           Planta tu Arbol
+
          </Button>
           </div>
         </div>
