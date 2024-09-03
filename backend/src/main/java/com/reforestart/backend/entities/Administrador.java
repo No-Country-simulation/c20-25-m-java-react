@@ -8,26 +8,26 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Table(name = "Usuarios")
+@Table(name = "administradores")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class User {
+public class Administrador {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_anagrafica",referencedColumnName = "id")
+    @JoinColumn(referencedColumnName = "id")
     private Anagrafica anagrafica;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Arbol> arboles;
+    @OneToMany(mappedBy = "administrador", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<User> usuarios;
 
-    @ManyToOne
-    @JoinColumn(name = "administrador_id", referencedColumnName = "id")
-    private Administrador administrador;
+    @OneToMany(mappedBy = "administrador", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ventas> ventas;
+
 }
