@@ -1,5 +1,8 @@
 com\reforestart\backend\configuration\SwaggerConfig.class
 com\reforestart\backend\entities\User.class
-com\reforestart\backend\entities\Admin.class
+com\reforestart\backend\entities\Administrador.class
+com\reforestart\backend\entities\Anagrafica.class
+com\reforestart\backend\entities\Ventas.class
+com\reforestart\backend\entities\Arbol.class
 com\reforestart\backend\BackendApplication.class
 com\reforestart\backend\controller\ControllerPueba.class
