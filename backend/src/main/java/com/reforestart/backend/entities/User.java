@@ -24,10 +24,5 @@ public class User {
     @JoinColumn(name = "id_anagrafica",referencedColumnName = "id")
     private Anagrafica anagrafica;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Arbol> arboles;
 
-    @ManyToOne
-    @JoinColumn(name = "administrador_id", referencedColumnName = "id")
-    private Administrador administrador;
 }

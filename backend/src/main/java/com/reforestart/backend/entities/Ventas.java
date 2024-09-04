@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Table(name = "ventas")
 @Entity
 @AllArgsConstructor
@@ -19,14 +21,8 @@ public class Ventas {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_arbol",referencedColumnName = "id")
-    private Arbol arbol;
+    @JoinColumn(name = "id_carrito",referencedColumnName = "id")
+    private CarritoDeCompras carritoDeCompras;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_usuario",referencedColumnName = "id")
-    private User usuario;
 
-    @ManyToOne
-    @JoinColumn(referencedColumnName = "id")
-    private Administrador administrador;
 }

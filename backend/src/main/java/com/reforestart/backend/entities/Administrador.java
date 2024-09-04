@@ -24,10 +24,4 @@ public class Administrador {
     @JoinColumn(referencedColumnName = "id")
     private Anagrafica anagrafica;
 
-    @OneToMany(mappedBy = "administrador", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<User> usuarios;
-
-    @OneToMany(mappedBy = "administrador", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Ventas> ventas;
-
 }
