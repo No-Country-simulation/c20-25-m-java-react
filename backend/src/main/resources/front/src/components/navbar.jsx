@@ -13,9 +13,9 @@ function Navbar() {
             {/* Contenedor del logo  */}
             <div className="flex items-center justify-center">
               <img
-                src="../src/assets/reforestart.png" // Asegúrate de que esta ruta sea correcta
+                src="/imgHome/reforestart.png" 
                 alt="Logo"
-                className="h-auto w-auto max-h-[130px] max-w-[190px]" // Ajusta la altura y ancho máximo del logo aquí
+                className="h-auto w-auto max-h-[130px] max-w-[190px]" 
               />
             </div>
           </Link>

@@ -1,0 +1,27 @@
+services:
+  app_reforestart:
+    build: backend
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:postgresql://reforestart-reforestart.c.aivencloud.com:15644/defaultdb?ssl=require&user=avnadmin&password=AVNS_Dc5ipB9c7Rh4LBkShQV&serverTimezone=UTC
+      DB_USER: avnadmin
+      DB_PASSWORD: AVNS_Dc5ipB9c7Rh4LBkShQV
+    restart: always
+    depends_on:
+      reforestart-reforestart.c.aivencloud.com:
+        condition: service_healthy
+
+  reforestart-reforestart.c.aivencloud.com:
+    image: postgres:16
+    ports:
+      - "15644:15644"
+    environment:
+      POSTGRES_AVNADMIN_PASSWORD: AVNS_Dc5ipB9c7Rh4LBkShQV
+      POSTGRES_PASSWORD: AVNS_Dc5ipB9c7Rh4LBkShQV
+      POSTGRES_DATABASE: defaultdb
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U avnadmin"]
+      timeout: 10s
+      retries: 10
