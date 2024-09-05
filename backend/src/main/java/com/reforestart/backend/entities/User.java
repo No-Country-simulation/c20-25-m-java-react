@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 
 @Table(name = "Usuarios")
 @Entity
@@ -23,6 +22,10 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_anagrafica",referencedColumnName = "id")
     private Anagrafica anagrafica;
+
+    @ManyToOne
+    @JoinColumn(name = "id_carrito", referencedColumnName = "id")
+    private CarritoDeCompras carritoDeCompras;
 
 
 }

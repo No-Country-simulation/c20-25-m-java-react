@@ -1,7 +1,6 @@
 package com.reforestart.backend.entities;
 
 import jakarta.persistence.*;
-import jdk.jfr.Description;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,5 +31,9 @@ public class Arbol {
 
     @Column
     private Long precio;
+
+    @ManyToOne
+    @JoinColumn(name = "id_carrito", referencedColumnName = "id")
+    private CarritoDeCompras carritoDeCompras;
 
 }

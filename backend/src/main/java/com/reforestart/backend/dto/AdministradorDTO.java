@@ -1,6 +1,5 @@
 package com.reforestart.backend.dto;
 
-import com.reforestart.backend.entities.Anagrafica;
 import lombok.*;
 
 
@@ -13,5 +12,5 @@ public class AdministradorDTO {
 
     private Long id;
 
-    private Anagrafica anagrafica;
+    private AnagraficaDTO anagrafica;
 }

@@ -20,11 +20,9 @@ public class CarritoDeCompras {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "id_arbol",referencedColumnName = "id")
-    private Arbol arbol;
+    @OneToMany(mappedBy = "carritoDeCompras")
+    private List<Arbol> arbol;
 
-    @OneToOne
-    @JoinColumn(name = "id_usuario",referencedColumnName = "id")
-    private User usuario;
+    @OneToMany(mappedBy = "carritoDeCompras")
+    private List<User> usuario;
 }
