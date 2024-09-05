@@ -29,4 +29,5 @@ public class Anagrafica {
     private Date fechaDeNacimiento;
     @Column(name = "lugar_de_nacimiento")
     private String lugarDeNacimiento;
+
 }

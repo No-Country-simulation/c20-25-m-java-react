@@ -6,21 +6,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 
-@Table(name = "administradores")
+@Table(name = "Carrito_compras")
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-public class Administrador {
+public class CarritoDeCompras {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(referencedColumnName = "id")
-    private Anagrafica anagrafica;
+    @OneToMany(mappedBy = "carritoDeCompras")
+    private List<Arbol> arbol;
 
+    @OneToMany(mappedBy = "carritoDeCompras")
+    private List<User> usuario;
 }
