@@ -1,7 +1,9 @@
 package com.reforestart.backend.dto;
 
-import com.reforestart.backend.entities.CarritoDeCompras;
+import com.reforestart.backend.entities.User;
 import lombok.*;
+
+import java.sql.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -10,10 +12,11 @@ import lombok.*;
 @Data
 public class VentasDTO {
 
-
     private Long id;
 
-    private CarritoDeCompras carritoDeCompras;
+    private User user;
 
+    private CarritoDeComprasDTO carritoDeCompras;
 
+    private Date fechaVenta;
 }

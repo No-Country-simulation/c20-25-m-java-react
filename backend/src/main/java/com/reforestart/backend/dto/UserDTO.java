@@ -1,7 +1,8 @@
 package com.reforestart.backend.dto;
 
-import com.reforestart.backend.entities.Anagrafica;
 import lombok.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,6 +13,10 @@ public class UserDTO {
 
     private Long id;
 
-    private Anagrafica anagrafica;
+    private String password;
+
+    private AnagraficaDTO anagrafica;
+
+    private List<ArbolDTO> arboles;
 
 }

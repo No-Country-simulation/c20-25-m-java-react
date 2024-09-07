@@ -36,7 +36,7 @@ public class AnagraficaMapper {
     }
 
     public Anagrafica anagraficaToEntity(AnagraficaDTO anagraficaDTO) {
-        
+
         Anagrafica anagraficaEntity = new Anagrafica();
         anagraficaEntity.setNombre(anagraficaDTO.getNombre());
         anagraficaEntity.setApellido(anagraficaDTO.getApellido());
