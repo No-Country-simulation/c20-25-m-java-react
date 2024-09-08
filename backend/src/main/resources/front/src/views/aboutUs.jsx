@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from '../components/navbar'
 import Button from '../components/button'
+import Footer from '../components/footer'
 
 const aboutUs = () => {
   return (
@@ -26,7 +27,7 @@ const aboutUs = () => {
                     </h1>
                     <p>
                     La Fundación ReforestArt es una organizacion naciente dedicada a la conservación de nuestros ecosistemas y contribuir con la disminución del impacto ambiental que se genera día a día. Esto se hace principalmente con el apoyo de la empresa Grupos especailizados y apasionados por la naturaleza y la reforestacion. 
-                    Nuestra meta principal es plantar árboles en las zonas afectadas por las actividades humanas y por desastres naturales. Hemos plantado más de xxxx árboles nativos en diferentes lugares de Argentina, como provincias de Salta, Santiago del Estero, Chaco y Formosa.
+                    Nuestra meta principal es plantar árboles en las zonas afectadas por las actividades humanas y por desastres naturales. Hemos plantado  árboles nativos en diferentes lugares de Argentina, como provincias de Salta, Santiago del Estero, Chaco y Formosa.
                     Gracias a las empresas y personas naturales que han hecho posible realizar esta contribución a nuestros ecosistemas.<br/>
                     <b>¡Este tan solo es el inicio!</b>
                     </p>
@@ -35,6 +36,7 @@ const aboutUs = () => {
 
             </div>
         </div>
+        <Footer/>
      </>
   )
 }

@@ -37,12 +37,12 @@ function Navbar() {
             Nosotros
           </Link>
           <Link
-            to="/iniciar-sesion"
+            to="/login"
             className="relative inline-block px-4 py-2 text-[#00712D] hover:bg-[#D6EFD8] hover:text-[#1A5319] text-shadow-navbar after:absolute after:inset-0 after:border-2 after:border-transparent after:rounded-md after:transition-all"
           >
             Iniciar Sesión
           </Link>
-          <Link to="/registrarse">
+          <Link to="/registro">
             <Button className="px-6 py-3 bg-green-600 text-white font-semibold rounded-md shadow-md hover:bg-green-700">
               Registrarse
             </Button>
