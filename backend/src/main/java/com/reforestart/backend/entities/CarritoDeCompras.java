@@ -20,9 +20,8 @@ public class CarritoDeCompras {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "carritoDeCompras")
-    private List<Arbol> arbol;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "carrito_id")
+    private List<Arbol> arboles;
 
-    @OneToMany(mappedBy = "carritoDeCompras")
-    private List<User> usuario;
 }

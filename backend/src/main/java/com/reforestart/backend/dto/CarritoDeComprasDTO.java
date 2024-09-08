@@ -1,8 +1,8 @@
 package com.reforestart.backend.dto;
 
-import com.reforestart.backend.entities.Arbol;
-import com.reforestart.backend.entities.User;
 import lombok.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,7 +13,5 @@ public class CarritoDeComprasDTO {
 
     private Long id;
 
-    private Arbol arbol;
-
-    private User usuario;
+    private List<ArbolDTO> arboles;
 }

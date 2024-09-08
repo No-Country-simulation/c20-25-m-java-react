@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Date;
-
 @Table(name = "arboles")
 @Entity
 @AllArgsConstructor
@@ -15,7 +13,6 @@ import java.sql.Date;
 @Getter
 @Setter
 public class Arbol {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,9 +28,5 @@ public class Arbol {
 
     @Column
     private Long precio;
-
-    @ManyToOne
-    @JoinColumn(name = "id_carrito", referencedColumnName = "id")
-    private CarritoDeCompras carritoDeCompras;
 
 }

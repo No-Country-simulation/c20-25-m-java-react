@@ -7,7 +7,6 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@Data
 public class AdministradorDTO {
 
     private Long id;

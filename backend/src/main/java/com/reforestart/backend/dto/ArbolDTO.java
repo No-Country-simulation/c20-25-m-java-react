@@ -6,7 +6,6 @@ import lombok.*;
 @NoArgsConstructor
 @Setter
 @Getter
-@Data
 public class ArbolDTO {
 
     private Long id;
@@ -18,4 +17,5 @@ public class ArbolDTO {
     private String descripcion;
 
     private Long precio;
+
 }

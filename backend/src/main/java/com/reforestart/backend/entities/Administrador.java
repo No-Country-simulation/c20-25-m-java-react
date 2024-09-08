@@ -20,7 +20,7 @@ public class Administrador {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(referencedColumnName = "id")
+    @JoinColumn(name = "anagrafica_id", referencedColumnName = "id")
     private Anagrafica anagrafica;
 
 }
