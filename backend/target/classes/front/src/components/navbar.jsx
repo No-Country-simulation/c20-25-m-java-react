@@ -49,10 +49,10 @@ function Navbar() {
           </Link>
         </div>
 
-     
+        {/* Mobile Menu (Hidden in desktop view) */}
         <div className="md:hidden flex items-center">
           <button className="text-gray-700 hover:text-green-500 focus:outline-none">
-        
+            {/* Icon for mobile menu */}
             <svg
               className="w-6 h-6"
               fill="none"

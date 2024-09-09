@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "../components/navbar";
-import Footer from "../components/footer";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import Section from "../components/section";
 
 const Home = () => {
@@ -23,6 +23,7 @@ const Home = () => {
           title="Nuestros Objetivos: Restaurar y Proteger"
           content="En Reforestar, nuestro objetivo es restaurar los ecosistemas forestales de Argentina y proteger la biodiversidad. Trabajamos para reforestar áreas críticas, apoyar la conservación de especies en peligro y promover prácticas sostenibles. Con cada proyecto, buscamos restaurar el equilibrio natural y fomentar un futuro más verde para las generaciones venideras."
           buttonText="Únete y Empieza a Plantar"
+          
         />
         <Section
           imgSrc="/imgHome/bosqueCo2.avif"

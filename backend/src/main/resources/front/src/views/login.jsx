@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Navbar from '../components/navbar';
-import Footer from '../components/footer';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 
 const Login = () => {
@@ -30,7 +30,7 @@ const Login = () => {
 
   // Función para validar la contraseña
   const validatePassword = (password) => {
-    return password.length >= 8; // Se podría mejorar con reglas adicionales
+    return password.length >= 8; 
   };
 
   // Función para manejar el submit del formulario
@@ -56,7 +56,7 @@ const Login = () => {
     // Si no hay errores, navega a la página de usuario
     if (Object.keys(newErrors).length === 0) {
       console.log('Inicio de sesión exitoso:', formData);
-      navigate('/user'); // Redireccionar a la página de usuario o dashboard
+      navigate('/user'); // Redireccionar a la página de usuario 
     } else {
       setErrors(newErrors);
     }
