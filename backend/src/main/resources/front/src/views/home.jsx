@@ -3,6 +3,8 @@ import Navbar from "../components/navbar";
 import "../App.css";
 import Footer from "../components/footer";
 import Section from "../components/section";
+import CommetnBox from "../components/commetnBox";
+
 
 const Home = () => {
   return (
@@ -32,6 +34,8 @@ const Home = () => {
         content="La huella de carbono mide el impacto de tus actividades diarias en el medio ambiente, en términos de emisiones de gases de efecto invernadero. Reducir tu huella es crucial para combatir el cambio climático. Cada árbol que plantas puede absorber entre 20 y 50 kg de CO2 por año, contribuyendo significativamente a mejorar la calidad del aire. Descubre cómo puedes calcular tu huella de carbono y aprender estrategias para reducir tus emisiones, apoyando así un futuro más sostenible."
         buttonText="Compensa tu CO2 Planta ahora"
       />
+      <CommetnBox/>
+      
     </div>
       <Footer/>
     </>
