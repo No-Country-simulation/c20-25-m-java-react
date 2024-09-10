@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '..components/Button';
+import Button from './button';
 import { useNavigate } from 'react-router-dom';
 
 const Section = ({ imgSrc, imgAlt, title, content, buttonText }) => {
