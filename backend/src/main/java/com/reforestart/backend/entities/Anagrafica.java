@@ -27,7 +27,10 @@ public class Anagrafica {
     @Column
     private String apellido;
 
-    @Column(name = "fecha_de_nacimiento")
+    @Column
+    private String email;
+
+    @Column(name = "fecha_de_nacimiento"    )
     @Temporal(TemporalType.DATE)
     private Date fechaDeNacimiento;
 

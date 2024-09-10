@@ -24,6 +24,9 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "abilitado")
+    private Boolean abilitado;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "anagrafica_id", referencedColumnName = "id")
     private Anagrafica anagrafica;
