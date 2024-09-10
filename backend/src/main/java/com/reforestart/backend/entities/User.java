@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.util.List;
 
+
 @Table(name = "Usuarios")
 @Entity
 @AllArgsConstructor
@@ -20,14 +21,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "password")
+    private String password;
+
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_anagrafica",referencedColumnName = "id")
+    @JoinColumn(name = "anagrafica_id", referencedColumnName = "id")
     private Anagrafica anagrafica;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
     private List<Arbol> arboles;
-
-    @ManyToOne
-    @JoinColumn(name = "administrador_id", referencedColumnName = "id")
-    private Administrador administrador;
 }

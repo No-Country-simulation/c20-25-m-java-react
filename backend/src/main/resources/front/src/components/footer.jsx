@@ -9,15 +9,15 @@ const Footer = () => {
         
         {/* Primera sección: Logo y redes sociales */}
         <div className="flex flex-col items-center md:items-start">
-          {/* Contenedor con fondo blanco sin padding */}
+        
           <div className="bg-white rounded-lg shadow-lg flex items-center justify-center">
             <img
               src="/imgHome/reforestart.png"
               alt="Logo"
-              className="h-[130px] w-[130px]"  // Ajusta la altura del logo y el ancho se ajusta automáticamente
+              className="h-[130px] w-[130px]" 
             />
           </div>
-          {/* Redes sociales distribuidas con space-between debajo del logo */}
+         
           <div className="mt-4 flex w-full justify-between max-w-[200px]">
             <a href="https://www.instagram.com/accounts/login/" aria-label="Instagram" className="text-[#E9EFEC] hover:text-white">
               <FontAwesomeIcon icon={faInstagram} size="lg" />
@@ -31,7 +31,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Segunda sección: Links y párrafo "Acerca de" */}
+        {/* Segunda sección: "Acerca de" */}
         <div className="mt-8 md:mt-0 text-center md:text-left">
           <p><strong>Acerca de</strong></p>
           <div className="mt-4">

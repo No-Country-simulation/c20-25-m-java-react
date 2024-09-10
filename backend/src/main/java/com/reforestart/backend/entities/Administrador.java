@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 
 @Table(name = "administradores")
 @Entity
@@ -21,13 +20,7 @@ public class Administrador {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(referencedColumnName = "id")
+    @JoinColumn(name = "anagrafica_id", referencedColumnName = "id")
     private Anagrafica anagrafica;
-
-    @OneToMany(mappedBy = "administrador", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<User> usuarios;
-
-    @OneToMany(mappedBy = "administrador", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Ventas> ventas;
 
 }

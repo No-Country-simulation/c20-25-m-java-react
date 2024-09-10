@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Date;
+
 @Table(name = "ventas")
 @Entity
 @AllArgsConstructor
@@ -18,15 +20,15 @@ public class Ventas {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_arbol",referencedColumnName = "id")
-    private Arbol arbol;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_usuario",referencedColumnName = "id")
-    private User usuario;
-
     @ManyToOne
-    @JoinColumn(referencedColumnName = "id")
-    private Administrador administrador;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "carrito_id", referencedColumnName = "id")
+    private CarritoDeCompras carritoDeCompras;
+
+    @Column(name = "fecha_de_venta")
+    @Temporal(TemporalType.DATE)
+    private Date fechaVenta;
 }

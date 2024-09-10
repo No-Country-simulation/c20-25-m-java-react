@@ -1,7 +1,14 @@
 import React from 'react';
-import Button from './button';
+import Button from '..components/Button';
+import { useNavigate } from 'react-router-dom';
 
 const Section = ({ imgSrc, imgAlt, title, content, buttonText }) => {
+  const navigate = useNavigate();
+
+  const handleButtonClick = ()=>{
+    navigate('/login')
+
+  }
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
     {/* Contenedor en dos columnas */}
@@ -23,7 +30,9 @@ const Section = ({ imgSrc, imgAlt, title, content, buttonText }) => {
         <p className="text-base md:text-lg text-gray-700 mb-6">
           {content}
         </p>
-        <Button className="text-base md:text-lg py-2 px-4">
+        <Button className="text-base md:text-lg py-2 px-4"
+        onClick={handleButtonClick}
+        >
           {buttonText}
         </Button>
       </div>
