@@ -47,4 +47,18 @@ public class ArbolMapper {
 
         return listaArbolDTOs;
     }
+
+    public List<Arbol> arbolToEntities(List<ArbolDTO> arboles) {
+
+        List<Arbol> listaArbol = new ArrayList<>();
+        if (arboles.isEmpty() || arboles.equals(null)) {
+            return Collections.emptyList();
+        }
+
+        for (ArbolDTO arbol : arboles){
+            listaArbol.add(arbolToEntity(arbol));
+        }
+
+        return listaArbol;
+    }
 }

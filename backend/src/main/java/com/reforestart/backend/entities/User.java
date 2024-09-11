@@ -1,6 +1,8 @@
 package com.reforestart.backend.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,20 +18,31 @@ import java.util.List;
 @Getter
 @Setter
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "password")
+    @Column(unique = true)
+    @NotBlank
+    @Size(min = 4, max = 20)
+    private String username;
+
+    @Column(unique = true)
+    private String email;
+
+    @NotBlank
     private String password;
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"),
+            uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "role_id"})}
+    )
+    private List<Role> roles;
 
-    @Column(name = "abilitado")
-    private Boolean abilitado;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "anagrafica_id", referencedColumnName = "id")
-    private Anagrafica anagrafica;
+    @Transient
+    private boolean admin;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")

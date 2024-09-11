@@ -23,7 +23,7 @@ const Carousel = ({ images, onImageChange }) => {
       >
         &lt;
       </button>
-      <img src={images[currentIndex]} alt="Tree" className="w-full h-full object-cover" />
+      <img src={images[currentIndex]} alt="Tree" className="w-full h-[380px] object-cover rounded-lg" />
       <button
         className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white px-4 py-2 rounded-full"
         onClick={handleNext}

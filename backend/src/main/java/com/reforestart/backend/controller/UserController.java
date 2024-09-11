@@ -1,6 +1,8 @@
 package com.reforestart.backend.controller;
 
 import com.reforestart.backend.dto.UserDTO;
+import com.reforestart.backend.entities.User;
+import com.reforestart.backend.mapping.UserMapper;
 import com.reforestart.backend.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +24,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    UserMapper userMapper;
 
 
 
@@ -45,7 +51,7 @@ public class UserController {
     )
     public ResponseEntity<List<UserDTO>> getAllUsers(){
 
-        List<UserDTO> listaUsuarios = userService.getUsersDTO();
+        List<UserDTO> listaUsuarios = userMapper.usersToDTOs(userService.findAll());
 
         if (listaUsuarios.isEmpty()) {
             return new ResponseEntity<>(listaUsuarios, HttpStatus.FOUND);
@@ -54,6 +60,14 @@ public class UserController {
          return new ResponseEntity<>(listaUsuarios, HttpStatus.OK);
     }
 
+    @GetMapping
+    private List<User> userList(){
+        return userService.findAll();
+    }
 
+    @PostMapping
+    public ResponseEntity<User> create(@RequestBody User user){
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
+    }
 
 }

@@ -13,11 +13,11 @@ import java.util.List;
 public class UserMapper {
 
     @Autowired
-    AnagraficaMapper anagraficaMapper;
+    RoleMapper roleMapper;
     @Autowired
     ArbolMapper arbolMapper;
 
-    public List<UserDTO> UsersToDTOs(List<User> listaUsers) {
+    public List<UserDTO> usersToDTOs(List<User> listaUsers) {
 
         List<UserDTO> listaUsersDTO = new ArrayList<>();
 
@@ -26,20 +26,52 @@ public class UserMapper {
         }
 
         for (User user : listaUsers){
-            listaUsersDTO.add(userDTO(user));
+            listaUsersDTO.add(userToDTO(user));
         }
 
         return listaUsersDTO;
     }
 
 
-    private UserDTO userDTO(User user) {
+    private UserDTO userToDTO(User user) {
         UserDTO userDTO = new UserDTO();
 
         userDTO.setId(user.getId());
-        userDTO.setAnagrafica(anagraficaMapper.anagraficaToDTO(user.getAnagrafica()));
+        userDTO.setEmail(user.getEmail());
+        userDTO.setRoles(roleMapper.rolesToDTOs(user.getRoles()));
+        userDTO.setUsername(user.getUsername());
+        userDTO.setPassword(user.getPassword());
         userDTO.setArboles(arbolMapper.arbolToDTOs(user.getArboles()));
 
         return userDTO;
+    }
+
+    public List<User> usersToEntities(List<UserDTO> userDTOList) {
+
+        List<User> userList = new ArrayList<>();
+
+        if (userDTOList.isEmpty() || userDTOList.equals(null)) {
+            return Collections.emptyList();
+        }
+
+        for (UserDTO userDTO : userDTOList){
+            userList.add(userToEntity(userDTO));
+        }
+
+        return userList;
+    }
+
+
+    private User userToEntity(UserDTO userDTO) {
+        User user = new User();
+
+        user.setId(userDTO.getId());
+        user.setEmail(userDTO.getEmail());
+        user.setRoles(roleMapper.rolesToEntities(userDTO.getRoles()));
+        user.setUsername(userDTO.getUsername());
+        user.setPassword(userDTO.getPassword());
+        user.setArboles(arbolMapper.arbolToEntities(userDTO.getArboles()));
+
+        return user;
     }
 }

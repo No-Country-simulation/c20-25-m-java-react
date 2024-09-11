@@ -1,56 +1,60 @@
 package com.reforestart.backend.service;
 
+
 import com.reforestart.backend.dto.UserDTO;
-import com.reforestart.backend.entities.Anagrafica;
+import com.reforestart.backend.entities.Role;
 import com.reforestart.backend.entities.User;
 import com.reforestart.backend.mapping.UserMapper;
+import com.reforestart.backend.repository.IRoleRepository;
 import com.reforestart.backend.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService implements IUserService{
 
     @Autowired
-    IUserRepository userRepository;
+    private IUserRepository userRepository;
+
     @Autowired
-    UserMapper userMapper;
+    private IRoleRepository roleRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+
 
     @Override
-    public List<User> getUsers() {
-        return null;
+    @Transactional(readOnly = true)
+    public List<User> findAll() {
+
+        return userRepository.findAll();
     }
 
     @Override
-    public List<UserDTO> getUsersDTO() {
-        List<UserDTO> listaUsers = userMapper.UsersToDTOs(userRepository.findAll());
-        return listaUsers;
-    }
+    @Transactional
+    public User save(User user) {
 
-    @Override
-    public void saveUser(User usuario) {
+        Optional<Role> optionalRoleUser = roleRepository.findByName("Role_USER");
+        List<Role> roles = new ArrayList<>();
 
-    }
+        optionalRoleUser.ifPresent(roles::add);
 
-    @Override
-    public void deleteUser(Long id) {
+        if(user.isAdmin()){
+            Optional<Role> optionalRoleAdmin = roleRepository.findByName("ROLE_ADMIN");
+            optionalRoleAdmin.ifPresent(roles::add);
+        }
 
-    }
+        user.setRoles(roles);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-    @Override
-    public User findUser(Long id) {
-        return null;
-    }
 
-    @Override
-    public void editUser(Long id_original, Anagrafica anagrafica) {
-
-    }
-
-    @Override
-    public void editUser(User usuario) {
-
+        return userRepository.save(user);
     }
 }
