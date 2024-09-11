@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../components/userContex'; // Asegúrate de importar el contexto
 import Navbar from '../components/navbar/';
 import Footer from '../components/Footer';
 import "../App.css";
@@ -13,6 +14,7 @@ const AccountRegister = () => {
 
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext); // Usar el contexto para actualizar el usuario
 
   // Función para manejar los cambios en los inputs
   const handleChange = (e) => {
@@ -57,9 +59,14 @@ const AccountRegister = () => {
 
     // Si no hay errores, navega a la página de usuario
     if (Object.keys(newErrors).length === 0) {
+      // Suponiendo que el registro es exitoso
       console.log('Registro exitoso:', formData);
-      // Redireccionar a la página de usuario o la vista deseada
-      navigate('/user'); // Cambia '/user' a la ruta de la página de usuario
+
+      // Actualizar el contexto del usuario
+      setUser({ name, email });
+
+      // Redireccionar a la página principal
+      navigate('/');
     } else {
       setErrors(newErrors);
     }

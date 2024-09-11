@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import Navbar from '../components/Navbar';
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../components/userContex'; // Asegúrate de importar el contexto
+import Navbar from '../components/navbar/';
 import Footer from '../components/Footer';
-
+import "../App.css";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ const Login = () => {
 
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext); // Usar el contexto para actualizar el usuario
 
   // Función para manejar los cambios en los inputs
   const handleChange = (e) => {
@@ -26,11 +28,6 @@ const Login = () => {
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
-  };
-
-  // Función para validar la contraseña
-  const validatePassword = (password) => {
-    return password.length >= 8; 
   };
 
   // Función para manejar el submit del formulario
@@ -49,14 +46,18 @@ const Login = () => {
     // Validación de la contraseña
     if (!password) {
       newErrors.password = 'La contraseña es obligatoria.';
-    } else if (!validatePassword(password)) {
-      newErrors.password = 'La contraseña debe tener al menos 8 caracteres.';
     }
 
-    // Si no hay errores, navega a la página de usuario
+    // Si no hay errores, navega a la página principal
     if (Object.keys(newErrors).length === 0) {
+      // Suponiendo que el inicio de sesión es exitoso
       console.log('Inicio de sesión exitoso:', formData);
-      navigate('/user'); // Redireccionar a la página de usuario 
+
+      // Actualizar el contexto del usuario
+      setUser({ email }); // Puedes añadir más datos si es necesario
+
+      // Redireccionar a la página principal
+      navigate('/');
     } else {
       setErrors(newErrors);
     }
@@ -64,7 +65,7 @@ const Login = () => {
 
   return (
     <>
-      <Navbar />
+    <Navbar />
       <div className="min-h-screen flex flex-col items-center justify-center bg-[#C4DAD2]">
         <div className="max-w-md w-full mx-auto bg-white p-6 rounded-md shadow-md">
           <h2 className="text-2xl font-bold mb-4">Iniciar Sesión</h2>
@@ -103,19 +104,9 @@ const Login = () => {
               Iniciar Sesión
             </button>
           </form>
-
-          {/* Enlace para registrarse */}
-          <div className="mt-4 text-center">
-            <p className="text-gray-700">
-              ¿No tienes cuenta?{' '}
-              <Link to="/accountRegister" className="text-green-600 hover:underline">
-                Registrarse
-              </Link>
-            </p>
-          </div>
         </div>
       </div>
-      <Footer />
+     <Footer/>
     </>
   );
 };
