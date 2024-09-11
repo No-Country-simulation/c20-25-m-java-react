@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../components/userContex'; // Asegúrate de importar el contexto
+import { UserContext } from '../components/userContex'; 
 import Navbar from '../components/navbar/';
 import Footer from '../components/Footer';
 import "../App.css";
