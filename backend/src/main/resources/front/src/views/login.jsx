@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../components/userContex'; // Asegúrate de importar el contexto
 import Navbar from '../components/navbar/';
 import Footer from '../components/Footer';
+import { loginUser } from '../services/apiService'; // Importa el servicio de inicio de sesión
 import "../App.css";
 
 const Login = () => {
@@ -14,6 +15,7 @@ const Login = () => {
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext); // Usar el contexto para actualizar el usuario
+  const [loading, setLoading] = useState(false);
 
   // Función para manejar los cambios en los inputs
   const handleChange = (e) => {
@@ -31,7 +33,7 @@ const Login = () => {
   };
 
   // Función para manejar el submit del formulario
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = formData;
     const newErrors = {};
@@ -48,16 +50,26 @@ const Login = () => {
       newErrors.password = 'La contraseña es obligatoria.';
     }
 
-    // Si no hay errores, navega a la página principal
     if (Object.keys(newErrors).length === 0) {
-      // Suponiendo que el inicio de sesión es exitoso
-      console.log('Inicio de sesión exitoso:', formData);
+      try {
+        setLoading(true);
+        // Llama al servicio de inicio de sesión
+        const response = await loginUser(email, password);
 
-      // Actualizar el contexto del usuario
-      setUser({ email }); // Puedes añadir más datos si es necesario
+        if (response && response.token) {
+          // Guarda el token y actualiza el contexto del usuario
+          setUser({ email, token: response.token });
 
-      // Redireccionar a la página principal
-      navigate('/');
+          // Redirecciona a la página principal
+          navigate('/');
+        } else {
+          setErrors({ general: 'Error al iniciar sesión. Verifica tus credenciales.' });
+        }
+      } catch (error) {
+        setErrors({ general: 'Error al conectar con el servidor.' });
+      } finally {
+        setLoading(false);
+      }
     } else {
       setErrors(newErrors);
     }
@@ -65,7 +77,7 @@ const Login = () => {
 
   return (
     <>
-    <Navbar />
+      <Navbar />
       <div className="min-h-screen flex flex-col items-center justify-center bg-[#C4DAD2]">
         <div className="max-w-md w-full mx-auto bg-white p-6 rounded-md shadow-md">
           <h2 className="text-2xl font-bold mb-4">Iniciar Sesión</h2>
@@ -96,17 +108,21 @@ const Login = () => {
               {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
             </div>
 
+            {/* Errores generales */}
+            {errors.general && <p className="text-red-500 text-sm mb-4">{errors.general}</p>}
+
             {/* Botón de enviar */}
             <button
               type="submit"
-              className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition duration-300"
+              className={`w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition duration-300 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              disabled={loading}
             >
-              Iniciar Sesión
+              {loading ? 'Cargando...' : 'Iniciar Sesión'}
             </button>
           </form>
         </div>
       </div>
-     <Footer/>
+      <Footer />
     </>
   );
 };

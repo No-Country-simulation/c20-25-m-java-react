@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../components/userContex'; 
 import Navbar from '../components/navbar/';
 import Footer from '../components/Footer';
+import { registerUser } from '../services/apiService';
 import "../App.css";
 
 const AccountRegister = () => {
@@ -13,6 +14,7 @@ const AccountRegister = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false); // Para indicar cuando se está procesando el registro
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext); // Usar el contexto para actualizar el usuario
 
@@ -32,13 +34,21 @@ const AccountRegister = () => {
   };
 
   // Función para validar la contraseña
-  const validatePassword = (password) => {
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
-    return passwordRegex.test(password);
-  };
+const validatePassword = (password) => {
+  // Expresión regular actualizada:
+  // (?=.*[A-Z]): al menos una letra mayúscula.
+  // (?=.*\d): al menos un dígito.
+  // (?=.*[!@#$%^&*]): al menos un carácter especial.
+  // [A-Za-z\d!@#$%^&*]{8,}: al menos 8 caracteres que pueden incluir letras, dígitos y caracteres especiales.
+  const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+
+  // Retornar si la contraseña cumple con el patrón
+  return passwordRegex.test(password);
+};
+
 
   // Función para manejar el submit del formulario
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { name, email, password } = formData;
     const newErrors = {};
@@ -57,24 +67,33 @@ const AccountRegister = () => {
       newErrors.password = 'La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un símbolo.';
     }
 
-    // Si no hay errores, navega a la página de usuario
+    // Si no hay errores, intentamos registrar al usuario
     if (Object.keys(newErrors).length === 0) {
-      // Suponiendo que el registro es exitoso
-      console.log('Registro exitoso:', formData);
+      try {
+        setLoading(true); // Indicamos que estamos procesando
+        // Llamamos a la función registerUser que realiza la solicitud a la API
+        const response = await registerUser(name, email, password);
+        
+        // Suponiendo que el registro es exitoso y el servidor devuelve los datos del usuario
+        setUser({ name: response.name, email: response.email });
 
-      // Actualizar el contexto del usuario
-      setUser({ name, email });
-
-      // Redireccionar a la página principal
-      navigate('/');
+        // Redireccionar a la página principal después del registro exitoso
+        navigate('/');
+      } catch (error) {
+        // Manejo de errores durante el registro
+        console.error('Error en el registro:', error);
+        newErrors.server = 'Hubo un error al registrar. Inténtalo nuevamente.';
+      } finally {
+        setLoading(false); // Terminamos el procesamiento
+      }
     } else {
-      setErrors(newErrors);
+      setErrors(newErrors); // Establecemos los errores de validación
     }
   };
 
   return (
     <>
-    <Navbar />
+      <Navbar />
       <div className="min-h-screen flex flex-col items-center justify-center bg-[#C4DAD2]">
         <div className="max-w-md w-full mx-auto bg-white p-6 rounded-md shadow-md">
           <h2 className="text-2xl font-bold mb-4">Registro de Usuario</h2>
@@ -117,17 +136,21 @@ const AccountRegister = () => {
               {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
             </div>
 
+            {/* Mensaje de error del servidor */}
+            {errors.server && <p className="text-red-500 text-sm mb-4">{errors.server}</p>}
+
             {/* Botón de enviar */}
             <button
               type="submit"
               className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition duration-300"
+              disabled={loading} // Deshabilitar el botón si está cargando
             >
-              Registrarse
+              {loading ? 'Registrando...' : 'Registrarse'}
             </button>
           </form>
         </div>
       </div>
-     <Footer/>
+      <Footer />
     </>
   );
 };
