@@ -4,7 +4,6 @@ package com.reforestart.backend.service;
 import com.reforestart.backend.dto.UserDTO;
 import com.reforestart.backend.entities.Role;
 import com.reforestart.backend.entities.User;
-import com.reforestart.backend.mapping.UserMapper;
 import com.reforestart.backend.repository.IRoleRepository;
 import com.reforestart.backend.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,4 +56,11 @@ public class UserService implements IUserService{
 
         return userRepository.save(user);
     }
+
+    @Override
+    public UserDTO save(UserDTO user) {
+        return null;
+    }
+
+
 }

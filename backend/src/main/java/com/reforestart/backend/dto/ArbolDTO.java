@@ -16,6 +16,6 @@ public class ArbolDTO {
 
     private String descripcion;
 
-    private Long precio;
+    private Integer precio;
 
 }

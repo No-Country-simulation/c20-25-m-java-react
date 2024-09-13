@@ -2,12 +2,12 @@ package com.reforestart.backend.mapping;
 
 import com.reforestart.backend.dto.ArbolDTO;
 import com.reforestart.backend.entities.Arbol;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ArbolMapper {
@@ -60,5 +60,22 @@ public class ArbolMapper {
         }
 
         return listaArbol;
+    }
+
+    public ArbolDTO arbolOptionaToDTO(Optional<Arbol> byId) {
+        ArbolDTO arbolDTO = new ArbolDTO();
+
+        if (byId.equals(Optional.empty())){
+            return null;
+        }
+
+
+        arbolDTO.setId(byId.get().getId());
+        arbolDTO.setPrecio(byId.get().getPrecio());
+        arbolDTO.setDescripcion(byId.get().getDescripcion());
+        arbolDTO.setNombre(byId.get().getNombre());
+        arbolDTO.setNombreCientifico(byId.get().getNombreCientifico());
+
+        return arbolDTO;
     }
 }
