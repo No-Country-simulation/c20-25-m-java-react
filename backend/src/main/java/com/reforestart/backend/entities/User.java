@@ -23,14 +23,14 @@ public class User {
     private Long id;
 
     @Column(unique = true)
-    @NotBlank
+    @NotBlank(message = "El username no puede estar en blanco")
     @Size(min = 4, max = 30)
     private String username;
 
     @Column(unique = true)
     private String email;
 
-    @NotBlank
+    @NotBlank(message = "El username no puede estar en blanco")
     private String password;
     @ManyToMany
     @JoinTable(
@@ -44,7 +44,7 @@ public class User {
     @Transient
     private boolean admin;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinColumn(name = "user_id")
     private List<Arbol> arboles;
 }

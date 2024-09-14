@@ -37,7 +37,7 @@ public class ArbolMapper {
     public List<ArbolDTO> arbolToDTOs(List<Arbol> arboles) {
 
         List<ArbolDTO> listaArbolDTOs = new ArrayList<>();
-        if (arboles.isEmpty() || arboles.equals(null)) {
+        if (arboles==null || arboles.isEmpty()) {
             return Collections.emptyList();
         }
 
@@ -51,7 +51,7 @@ public class ArbolMapper {
     public List<Arbol> arbolToEntities(List<ArbolDTO> arboles) {
 
         List<Arbol> listaArbol = new ArrayList<>();
-        if (arboles.isEmpty() || arboles.equals(null)) {
+        if (arboles==null || arboles.isEmpty()) {
             return Collections.emptyList();
         }
 
@@ -68,7 +68,6 @@ public class ArbolMapper {
         if (byId.equals(Optional.empty())){
             return null;
         }
-
 
         arbolDTO.setId(byId.get().getId());
         arbolDTO.setPrecio(byId.get().getPrecio());

@@ -30,7 +30,7 @@ public class RoleMapper {
     public List<Role> rolesToEntities (List<RoleDTO> roleDTOList){
         List<Role> roleList = new ArrayList<>();
 
-        if (roleDTOList.isEmpty() || roleDTOList.equals(null))
+        if (roleDTOList==null || roleDTOList.isEmpty())
             return Collections.emptyList();
 
         for (RoleDTO role: roleDTOList) {
@@ -43,7 +43,7 @@ public class RoleMapper {
     public List<RoleDTO> rolesToDTOs (List<Role> roleList){
         List<RoleDTO> roleDTOList = new ArrayList<>();
 
-        if (roleList.isEmpty() || roleDTOList.equals(null))
+        if (roleDTOList==null || roleList.isEmpty())
             return Collections.emptyList();
 
         for (Role role: roleList) {

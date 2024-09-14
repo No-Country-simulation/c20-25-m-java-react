@@ -4,6 +4,8 @@ package com.reforestart.backend.service;
 import com.reforestart.backend.dto.UserDTO;
 import com.reforestart.backend.entities.Role;
 import com.reforestart.backend.entities.User;
+import com.reforestart.backend.mapping.RoleMapper;
+import com.reforestart.backend.mapping.UserMapper;
 import com.reforestart.backend.repository.IRoleRepository;
 import com.reforestart.backend.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,10 @@ import java.util.Optional;
 
 @Service
 public class UserService implements IUserService{
-
+    @Autowired
+    RoleMapper roleMapper;
+    @Autowired
+    UserMapper userMapper;
     @Autowired
     private IUserRepository userRepository;
 
@@ -31,36 +36,43 @@ public class UserService implements IUserService{
 
     @Override
     @Transactional(readOnly = true)
-    public List<User> findAll() {
-
-        return userRepository.findAll();
+    public List<UserDTO> findAll() {
+        List<UserDTO> userDTO = userMapper.usersToDTOs(userRepository.findAll());
+        return userDTO;
     }
 
     @Override
     @Transactional
-    public User save(User user) {
+    public UserDTO save(UserDTO userDTO) {
+
+        User user = userMapper.userToEntity(userDTO);
 
         Optional<Role> optionalRoleUser = roleRepository.findByName("Role_USER");
         List<Role> roles = new ArrayList<>();
 
         optionalRoleUser.ifPresent(roles::add);
 
-        if(user.isAdmin()){
+        if(userDTO.isAdmin()){
             Optional<Role> optionalRoleAdmin = roleRepository.findByName("ROLE_ADMIN");
             optionalRoleAdmin.ifPresent(roles::add);
         }
 
         user.setRoles(roles);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        System.out.println("ESTOYYYYYYYYYYYYYYY EN EL Servicio 1");
 
+           if (userDTO.getPassword() == null || userDTO.getPassword().isEmpty()) {
+            throw new IllegalArgumentException("La contraseña no puede ser nula o vacía");
+        }
+        System.out.println("ESTOYYYYYYYYYYYYYYY EN EL Service 2");
 
-        return userRepository.save(user);
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+
+        User savedUser = userRepository.save(user);
+
+        return userMapper.userToDTO(savedUser);
     }
 
-    @Override
-    public UserDTO save(UserDTO user) {
-        return null;
-    }
+
 
 
 }

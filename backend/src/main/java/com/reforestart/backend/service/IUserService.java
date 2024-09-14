@@ -8,10 +8,7 @@ import java.util.List;
 
 public interface IUserService {
 
-    List<User> findAll();
-
-
-    User save(User user);
+    List<UserDTO> findAll();
 
     UserDTO save(UserDTO user);
 }

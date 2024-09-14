@@ -21,7 +21,7 @@ public class UserMapper {
 
         List<UserDTO> listaUsersDTO = new ArrayList<>();
 
-        if (listaUsers.isEmpty() || listaUsers.equals(null)) {
+        if (listaUsers.isEmpty() || listaUsers==null) {
             return Collections.emptyList();
         }
 
@@ -36,7 +36,6 @@ public class UserMapper {
     public UserDTO userToDTO(User user) {
         UserDTO userDTO = new UserDTO();
 
-        userDTO.setId(user.getId());
         userDTO.setEmail(user.getEmail());
         userDTO.setRoles(roleMapper.rolesToDTOs(user.getRoles()));
         userDTO.setUsername(user.getUsername());
@@ -62,10 +61,9 @@ public class UserMapper {
     }
 
 
-    private User userToEntity(UserDTO userDTO) {
+    public User userToEntity(UserDTO userDTO) {
         User user = new User();
 
-        user.setId(userDTO.getId());
         user.setEmail(userDTO.getEmail());
         user.setRoles(roleMapper.rolesToEntities(userDTO.getRoles()));
         user.setUsername(userDTO.getUsername());
@@ -74,4 +72,5 @@ public class UserMapper {
 
         return user;
     }
+
 }

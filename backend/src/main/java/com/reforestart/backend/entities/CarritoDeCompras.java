@@ -20,7 +20,7 @@ public class CarritoDeCompras {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinColumn(name = "carrito_id")
     private List<Arbol> arboles;
 

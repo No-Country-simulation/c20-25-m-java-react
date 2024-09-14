@@ -34,7 +34,7 @@ public class UserController {
 
 
 
-    @GetMapping(value = "/getallusers")
+    @GetMapping
     @Operation(
             summary = "Obtener Usuariso",
             description = "Traer todos los usuarios inscritos de nuestra base de datos.",
@@ -55,27 +55,24 @@ public class UserController {
     )
     public ResponseEntity<List<UserDTO>> getAllUsers(){
 
-        List<UserDTO> listaUsuarios = userMapper.usersToDTOs(userService.findAll());
+        List<UserDTO> listaUsuarios = userService.findAll();
 
         if (listaUsuarios.isEmpty()) {
-            return new ResponseEntity<>(listaUsuarios, HttpStatus.FOUND);
+            return new ResponseEntity<>(listaUsuarios, HttpStatus.NOT_FOUND);
         }
 
          return new ResponseEntity<>(listaUsuarios, HttpStatus.OK);
     }
 
-    @GetMapping
-    private List<User> userList(){
-
-        return userService.findAll();
-    }
-
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody User user, BindingResult result){
-        if (result.hasErrors()){
+    public ResponseEntity<?> create(@Valid @RequestBody UserDTO userDTO, BindingResult result) {
+
+
+        if (result.hasErrors()) {
             return validation(result);
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(userDTO));
     }
 
     private ResponseEntity<?> validation(BindingResult result) {
@@ -83,6 +80,7 @@ public class UserController {
         result.getFieldErrors().forEach(err->
                 errors.put(err.getField(), "El campo "+err.getField()+" "+err.getDefaultMessage())
         );
+
         return ResponseEntity.badRequest().body(errors);
     }
 }

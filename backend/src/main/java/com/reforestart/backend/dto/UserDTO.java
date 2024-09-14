@@ -1,4 +1,6 @@
 package com.reforestart.backend.dto;
+import jakarta.persistence.Transient;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.List;
@@ -19,6 +21,8 @@ public class UserDTO {
     private String password;
 
     private List<RoleDTO> roles;
+
+    private boolean admin;
 
     private List<ArbolDTO> arboles;
 
