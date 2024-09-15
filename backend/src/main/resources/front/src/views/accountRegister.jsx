@@ -94,7 +94,7 @@ const validatePassword = (password) => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#C4DAD2]">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#F2F1EB]">
         <div className="max-w-md w-full mx-auto bg-white p-6 rounded-md shadow-md">
           <h2 className="text-2xl font-bold mb-4">Registro de Usuario</h2>
           <form onSubmit={handleSubmit}>
