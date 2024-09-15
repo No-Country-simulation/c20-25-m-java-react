@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/navbar';
 import Footer from '../components/Footer';
 import Carousel from '../components/carruselTree';
 import TreeInfo from '../components/treeInfo';
@@ -14,19 +14,27 @@ const trees = [
   {
     name: 'Quebracho Colorado',
     species: 'Schinopsis balansae',
-    description: 'El Quebracho Colorado es un árbol nativo del Gran Chaco que se destaca por su madera dura y resistente.',
+    description: (
+      <>
+  El Quebracho Colorado es un árbol nativo que se encuentra en las provincias de Corrientes, Chaco, Formosa, y en el norte de Santa Fe y Entre Ríos.
+  <br />
+  Es el árbol forestal argentino desde 1956 y, desde 1998, está incluido entre las especies amenazadas de la lista roja de la Unión Internacional para la Conservación de la Naturaleza (UICN).
+</>
+
+    )
+    ,
     co2Compensated: '50',
   },
   {
     name: 'Timbó',
     species: 'Enterolobium contortisiliquum',
-    description: 'El Timbó es un árbol grande que se encuentra en las selvas tropicales y subtropicales, conocido por su resistencia.',
+    description: 'El Timbó es un árbol grande que se encuentra en las selvas tropicales y subtropicales especificamente en en la provincia de Misiones, es en una de las regiones donde acoge la mayor biodiversidad de la Argentina donde habitan mas de 500 especies de aves.',
     co2Compensated: '45',
   },
   {
     name: 'Arrayán',
     species: 'Luma apiculata',
-    description: 'El Arrayán es un árbol de la Patagonia, valorado por su corteza roja y sus pequeñas flores blancas.',
+    description: 'El Arrayán es un árbol de la Patagonia,especificamente en las  zonas andina desde el centro de Neuquén, hasta el norte de la provincia del Chubut. Los arrayanes más antiguos pueden tener hasta 600 años, aproximadamente,.',
     co2Compensated: '55',
   }
 ];
@@ -62,7 +70,7 @@ const PlanTree = () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-[#C4DAD2]">
+      <div className="min-h-screen bg-[#F2F1EB]">
         <div className="pt-20 flex flex-col lg:flex-row">
           <div className="lg:w-1/2 p-4">
             <Carousel images={images} onImageChange={handleImageChange} />

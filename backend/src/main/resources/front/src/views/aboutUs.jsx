@@ -8,7 +8,7 @@ const aboutUs = () => {
     return (
         <>
             <Navbar />
-            <div className="min-h-screen bg-[#C4DAD2]">
+            <div className="min-h-screen [#F2F1EB]">
                 <Section
                     imgSrc="/imgAbout/nosotros.webp"
                     imgAlt="nosotros"

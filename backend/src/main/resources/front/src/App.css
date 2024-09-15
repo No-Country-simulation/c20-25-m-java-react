@@ -1,3 +1,7 @@
+/* index.css o App.css */
+body {
+  background-color: #F2F1EB;
+}
 
 
 .text-shadow-navbar {
@@ -9,3 +13,83 @@
   }
 
 
+/* Para pantallas pequeñas - 281px a 520px */
+@media (max-width: 520px) {
+  h1 {
+    font-size: 1.25rem; /* Reducir el tamaño del título */
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 0.75rem; /* Reducir el tamaño del texto */
+    margin-bottom: 0.75rem;
+  }
+
+  button {
+    width: 100%; /* Botón a ancho completo */
+    padding: 0.5rem; /* Ajuste del padding del botón */
+    font-size: 0.875rem; /* Reducir el tamaño del texto del botón */
+  }
+
+  img {
+    width: 100%; /* Asegurarse de que la imagen ocupe todo el contenedor */
+    height: auto; /* Mantener proporciones */
+  }
+
+  .container {
+    padding: 0.5rem; /* Reducir padding en pantallas muy pequeñas */
+  }
+
+  .grid {
+    grid-template-columns: 1fr; /* Una columna para pantallas muy pequeñas */
+  }
+}
+
+/* Para pantallas medianas - 521px a 771px */
+@media (min-width: 521px) and (max-width: 771px) {
+  h1 {
+    font-size: 1.75rem; /* Ajustar tamaño del título para pantallas medianas */
+    line-height: 1.3;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 0.875rem; /* Ajustar tamaño del texto */
+    margin-bottom: 1rem;
+  }
+
+  button {
+    width: 100%; /* Botón a ancho completo */
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem; /* Reducir tamaño del texto del botón */
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  .container {
+    padding: 1rem; /* Padding moderado para pantallas medianas */
+  }
+
+  .grid {
+    grid-template-columns: 1fr; /* Una sola columna hasta 771px */
+  }
+}
+
+
+/* Carrusel para resoluciones específicas de 769px a 771px y pantallas pequeñas */
+@media (max-width: 771px) {
+  .carousel-button {
+    display: none; /* Ocultar los botones en pantallas pequeñas y en el rango problemático */
+  }
+}
+
+/* Carrusel para pantallas grandes (772px y superiores) */
+@media (min-width: 772px) {
+  .carousel-button {
+    display: flex; /* Mostrar los botones normalmente en pantallas grandes */
+  }
+}
