@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faTwitter, faFacebookF } from '@fortawesome/free-brands-svg-icons';
 
@@ -30,13 +31,13 @@ const Footer = () => {
 
     {/* Segunda sección: "Acerca de" */}
     <div className="mt-8 md:mt-0 text-center md:text-left">
-      <p><strong>Acerca de</strong></p>
-      <div className="mt-4">
-        <a href="#" className="block hover:underline">Nosotros</a>
-        <a href="#" className="block hover:underline">Preguntas frecuentes</a>
-        <a href="#" className="block hover:underline">Planta</a>
-      </div>
-    </div>
+  <p><strong>Acerca de</strong></p>
+  <div className="mt-4">
+    <Link to="/nosotros" className="block hover:underline">Nosotros</Link>
+    <Link to="/question" className="block hover:underline">Preguntas frecuentes</Link>
+    <Link to="/plantree" className="block hover:underline">Planta</Link>
+  </div>
+</div>
 
     {/* Última sección: Desarrollado por */}
     <div className="mt-8 md:mt-0 text-center md:text-left">
