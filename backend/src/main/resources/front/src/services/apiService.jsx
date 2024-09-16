@@ -1,7 +1,7 @@
 
 
 // URL base del servidor o API. Cambia esto según la URL de tu backend
-const BASE_URL = 'https://tu-backend.com/api';
+const BASE_URL = ' http://localhost:3000';
 
 // Función para registrar un nuevo usuario
 // Parámetros: name, email y password que provienen del formulario de registro
@@ -14,6 +14,8 @@ export const registerUser = async (name, email, password) => {
       },
       body: JSON.stringify({ name, email, password }), // Convertimos los datos a formato JSON
     });
+    console.log(response)
+
 
     // Verificamos si la respuesta del servidor fue exitosa
     if (!response.ok) {
@@ -44,7 +46,7 @@ export const loginUser = async (email, password) => {
       },
       body: JSON.stringify({ email, password }), // Convertimos los datos a formato JSON
     });
-
+console.log(response)
     // Verificamos si la respuesta fue exitosa
     if (!response.ok) {
       throw new Error('Error al iniciar sesión');
