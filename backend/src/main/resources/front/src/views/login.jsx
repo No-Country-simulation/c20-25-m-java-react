@@ -1,11 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../components/userContex'; // Asegúrate de importar el contexto
+import { UserContext } from '../components/userContex'; 
 import Navbar from '../components/navbar/';
 import Footer from '../components/Footer';
-import { loginUser } from '../services/apiService'; // Importa el servicio de inicio de sesión
+import { loginUser } from '../services/apiService'; 
 import "../App.css";
 
+// Componente de Login
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
@@ -14,10 +15,10 @@ const Login = () => {
 
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
-  const { setUser } = useContext(UserContext); // Usar el contexto para actualizar el usuario
+  const { setUser } = useContext(UserContext); 
   const [loading, setLoading] = useState(false);
 
-  // Función para manejar los cambios en los inputs
+  // Manejar cambios en el formulario
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -26,26 +27,24 @@ const Login = () => {
     });
   };
 
-  // Función para validar el email
+  // Validar el formato del correo electrónico
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
-  // Función para manejar el submit del formulario
+  // Manejar el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = formData;
     const newErrors = {};
 
-    // Validación del email
     if (!email) {
       newErrors.email = 'El correo electrónico es obligatorio.';
     } else if (!validateEmail(email)) {
       newErrors.email = 'El correo electrónico no es válido.';
     }
 
-    // Validación de la contraseña
     if (!password) {
       newErrors.password = 'La contraseña es obligatoria.';
     }
@@ -53,14 +52,10 @@ const Login = () => {
     if (Object.keys(newErrors).length === 0) {
       try {
         setLoading(true);
-        // Llama al servicio de inicio de sesión
         const response = await loginUser(email, password);
 
         if (response && response.token) {
-          // Guarda el token y actualiza el contexto del usuario
-          setUser({ email, token: response.token });
-
-          // Redirecciona a la página principal
+          setUser({ name: response.name, email, token: response.token }); 
           navigate('/');
         } else {
           setErrors({ general: 'Error al iniciar sesión. Verifica tus credenciales.' });
