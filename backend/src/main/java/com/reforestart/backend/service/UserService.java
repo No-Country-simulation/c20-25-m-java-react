@@ -2,10 +2,12 @@ package com.reforestart.backend.service;
 
 
 import com.reforestart.backend.dto.UserDTO;
+import com.reforestart.backend.dto.UserPassworUsernameDTO;
 import com.reforestart.backend.entities.Role;
 import com.reforestart.backend.entities.User;
 import com.reforestart.backend.mapping.RoleMapper;
 import com.reforestart.backend.mapping.UserMapper;
+import com.reforestart.backend.mapping.UserPNameMapper;
 import com.reforestart.backend.repository.IRoleRepository;
 import com.reforestart.backend.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ import java.util.Optional;
 
 @Service
 public class UserService implements IUserService{
+
+    @Autowired
+    UserPNameMapper userPNameMapper;
     @Autowired
     RoleMapper roleMapper;
     @Autowired
@@ -47,10 +52,14 @@ public class UserService implements IUserService{
 
         User user = userMapper.userToEntity(userDTO);
 
-        Optional<Role> optionalRoleUser = roleRepository.findByName("Role_USER");
+        Optional<Role> optionalRoleUser = roleRepository.findByName("ROLE_USER");
         List<Role> roles = new ArrayList<>();
 
-        optionalRoleUser.ifPresent(roles::add);
+        if (optionalRoleUser.isPresent()) {
+            roles.add(optionalRoleUser.get());
+        } else {
+            throw new IllegalArgumentException("El rol ROLE_USER no existe.");
+        }
 
         if(userDTO.isAdmin()){
             Optional<Role> optionalRoleAdmin = roleRepository.findByName("ROLE_ADMIN");
@@ -60,11 +69,12 @@ public class UserService implements IUserService{
         user.setRoles(roles);
         System.out.println("ESTOYYYYYYYYYYYYYYY EN EL Servicio 1");
 
-           if (userDTO.getPassword() == null || userDTO.getPassword().isEmpty()) {
-            throw new IllegalArgumentException("La contraseña no puede ser nula o vacía");
-        }
+        // Validación de contraseña
+       if (userDTO.getPassword()==null || userDTO.getPassword().isEmpty()) {
+        throw new IllegalArgumentException("La contraseña no puede ser nula o vacía");
+    }
         System.out.println("ESTOYYYYYYYYYYYYYYY EN EL Service 2");
-
+        // Codificar contraseña
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 
         User savedUser = userRepository.save(user);
@@ -73,6 +83,41 @@ public class UserService implements IUserService{
     }
 
 
+    @Override
+    @Transactional
+    public UserPassworUsernameDTO save(UserPassworUsernameDTO userDTO) {
+
+        User user = userPNameMapper.userPassToEntity(userDTO);
+
+        Optional<Role> optionalRoleUser = roleRepository.findByName("ROLE_USER");
+        List<Role> roles = new ArrayList<>();
+
+        if (optionalRoleUser.isPresent()) {
+            roles.add(optionalRoleUser.get());
+        } else {
+            throw new IllegalArgumentException("El rol ROLE_USER no existe.");
+        }
+
+        if(userDTO.isAdmin()){
+            Optional<Role> optionalRoleAdmin = roleRepository.findByName("ROLE_ADMIN");
+            optionalRoleAdmin.ifPresent(roles::add);
+        }
+
+        user.setRoles(roles);
+        System.out.println("ESTOYYYYYYYYYYYYYYY EN EL Servicio 1");
+
+        // Validación de contraseña
+        if (userDTO.getPassword()==null || userDTO.getPassword().isEmpty()) {
+            throw new IllegalArgumentException("La contraseña no puede ser nula o vacía");
+        }
+        System.out.println("ESTOYYYYYYYYYYYYYYY EN EL Service 2");
+        // Codificar contraseña
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+
+        User savedUser = userRepository.save(user);
+
+        return userPNameMapper.userPassworUsernameToDTO(savedUser);
+    }
 
 
 }
