@@ -29,8 +29,7 @@ public class AnagraficaMapper {
         anagraficaDTO.setId(anagrafica.getId());
         anagraficaDTO.setNombre(anagrafica.getNombre());
         anagraficaDTO.setApellido(anagrafica.getApellido());
-        anagraficaDTO.setLugarDeNacimiento(anagrafica.getLugarDeNacimiento());
-        anagraficaDTO.setFechaDeNacimiento(anagrafica.getFechaDeNacimiento());
+
 
         return anagraficaDTO;
     }
@@ -40,9 +39,6 @@ public class AnagraficaMapper {
         Anagrafica anagraficaEntity = new Anagrafica();
         anagraficaEntity.setNombre(anagraficaDTO.getNombre());
         anagraficaEntity.setApellido(anagraficaDTO.getApellido());
-        anagraficaEntity.setFechaDeNacimiento(anagraficaDTO.getFechaDeNacimiento());
-        anagraficaEntity.setLugarDeNacimiento(anagraficaDTO.getLugarDeNacimiento());
-
         return anagraficaEntity;
     }
 

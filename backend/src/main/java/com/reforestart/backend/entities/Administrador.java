@@ -19,7 +19,7 @@ public class Administrador {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "anagrafica_id", referencedColumnName = "id")
     private Anagrafica anagrafica;
 
