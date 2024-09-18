@@ -13,7 +13,7 @@
 	<name>backend</name>
 	<description>Proyecto para reforestar junto a No Country</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>22</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
