@@ -1,23 +1,21 @@
 package com.reforestart.backend.service;
+
 import com.reforestart.backend.entities.Arbol;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IArbolService {
 
-    public List<Arbol> getArboles();
+    List<Arbol> findAll();
 
-    public  void saveAbol(Arbol arbol);
+    Optional<Arbol> findById(Long id);
 
-    public void deleteArbol(Long id);
+    Arbol saveAbol(Arbol arbol);
 
-    public Arbol findArbol(Long id);
+    Optional<Arbol> update( Long id,Arbol arbol);
 
-    public void  editArbol(Long id_original,
-                                String nombreNuevo,
-                                String nombreCientificoNuevo,
-                                String descripcionNuevo,
-                                Long precio);
+    Optional<Arbol> delete(Long id);
 
-    public void editArbol(Arbol arbol);
+
 }

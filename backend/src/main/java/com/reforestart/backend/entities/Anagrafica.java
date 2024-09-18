@@ -30,9 +30,4 @@ public class Anagrafica {
     @Column
     private String email;
 
-    @Column(name = "fecha_de_nacimiento"    )
-    @Temporal(TemporalType.DATE)
-    private Date fechaDeNacimiento;
-
-    @Column(name = "lugar_de_nacimiento")
-    private String lugarDeNacimiento;}
+}
