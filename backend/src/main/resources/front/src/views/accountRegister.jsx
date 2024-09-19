@@ -8,7 +8,7 @@ import "../App.css";
 
 const AccountRegister = () => {
   const [formData, setFormData] = useState({
-    name: '',
+    username: '',
     email: '',
     password: '',
   });
@@ -50,7 +50,7 @@ const validatePassword = (password) => {
   // Función para manejar el submit del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { name, email, password } = formData;
+    const { username, email, password } = formData;
     const newErrors = {};
 
     // Validación del email
@@ -72,7 +72,7 @@ const validatePassword = (password) => {
       try {
         setLoading(true); // Indicamos que estamos procesando
         // Llamamos a la función registerUser que realiza la solicitud a la API
-        const response = await registerUser(name, email, password);
+        const response = await registerUser(username, email, password);
         
         // Suponiendo que el registro es exitoso y el servidor devuelve los datos del usuario
         setUser({ name: response.name, email: response.email });
@@ -103,8 +103,8 @@ const validatePassword = (password) => {
               <label className="block text-gray-700 font-medium mb-2">Nombre</label>
               <input
                 type="text"
-                name="name"
-                value={formData.name}
+                name="username"
+                value={formData.username}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-green-500"
               />
