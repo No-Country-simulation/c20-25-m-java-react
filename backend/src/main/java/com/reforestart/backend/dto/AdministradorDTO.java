@@ -9,6 +9,7 @@ import lombok.*;
 @Setter
 public class AdministradorDTO {
 
+
     private Long id;
 
     private AnagraficaDTO anagrafica;

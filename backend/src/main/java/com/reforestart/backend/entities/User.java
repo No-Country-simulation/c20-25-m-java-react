@@ -1,5 +1,7 @@
 package com.reforestart.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.reforestart.backend.validation.ExistsByUsername;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -22,6 +24,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ExistsByUsername
     @Column(unique = true)
     @NotBlank(message = "El username no puede estar en blanco")
     @Size(min = 4, max = 30)
@@ -31,6 +34,7 @@ public class User {
     private String email;
 
     @NotBlank(message = "El username no puede estar en blanco")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     @ManyToMany
     @JoinTable(
@@ -40,6 +44,13 @@ public class User {
             uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "role_id"})}
     )
     private List<Role> roles;
+
+//    private boolean enabled;
+//
+//    @PrePersist
+//    public void prePersist(){
+//        enabled=true;
+//    }
 
     @Transient
     private boolean admin;

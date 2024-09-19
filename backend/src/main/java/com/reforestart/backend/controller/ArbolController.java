@@ -4,7 +4,6 @@ import com.reforestart.backend.dto.ArbolDTO;
 import com.reforestart.backend.entities.Arbol;
 import com.reforestart.backend.mapping.ArbolMapper;
 import com.reforestart.backend.service.ArbolService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -58,7 +57,7 @@ public class ArbolController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Arbol> update(@Valid @RequestBody Arbol arbol, BindingResult result ,@PathVariable Long id) {
+    public ResponseEntity<Arbol> update(@Valid @org.springframework.web.bind.annotation.RequestBody Arbol arbol, BindingResult result , @PathVariable Long id) {
         Optional<Arbol> arbolOptional = arbolService.update(id, arbol);
         if (arbolOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.CREATED).body(arbolOptional.orElseThrow());

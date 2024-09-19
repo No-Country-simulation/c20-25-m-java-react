@@ -8,7 +8,6 @@ import java.sql.Date;
 @NoArgsConstructor
 @Setter
 @Getter
-@Data
 public class AnagraficaDTO {
 
 

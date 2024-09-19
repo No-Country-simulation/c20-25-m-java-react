@@ -63,11 +63,14 @@ public class UserController {
         if (result.hasErrors()) {
             return validation(result);
         }
-        try {
             return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(userDTO));
-        }catch (IllegalArgumentException e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+
+    }
+
+    @PostMapping(value = "/register")
+    public ResponseEntity<?> register(@Valid @org.springframework.web.bind.annotation.RequestBody UserDTO userDTO, BindingResult result) {
+        userDTO.setAdmin(false);
+        return create(userDTO, result);
 
     }
     private ResponseEntity<?> validation(BindingResult result) {

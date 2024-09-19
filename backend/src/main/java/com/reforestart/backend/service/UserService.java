@@ -67,14 +67,11 @@ public class UserService implements IUserService{
         }
 
         user.setRoles(roles);
-        System.out.println("ESTOYYYYYYYYYYYYYYY EN EL Servicio 1");
 
         // Validación de contraseña
        if (userDTO.getPassword()==null || userDTO.getPassword().isEmpty()) {
         throw new IllegalArgumentException("La contraseña no puede ser nula o vacía");
     }
-        System.out.println("ESTOYYYYYYYYYYYYYYY EN EL Service 2");
-        // Codificar contraseña
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 
         User savedUser = userRepository.save(user);
@@ -117,6 +114,12 @@ public class UserService implements IUserService{
         User savedUser = userRepository.save(user);
 
         return userPNameMapper.userPassworUsernameToDTO(savedUser);
+    }
+
+    @Override
+    @Transactional
+    public boolean existsByUsername(String username) {
+        return userRepository.existsByUsername(username);
     }
 
 

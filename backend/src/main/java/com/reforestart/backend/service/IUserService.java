@@ -15,4 +15,6 @@ public interface IUserService {
 
     @Transactional
     UserPassworUsernameDTO save(UserPassworUsernameDTO userDTO);
+
+    boolean existsByUsername(String username);
 }
