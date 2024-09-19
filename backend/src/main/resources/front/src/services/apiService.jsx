@@ -1,18 +1,19 @@
 
 
 // URL base del servidor o API. Cambia esto según la URL de tu backend
-const BASE_URL = ' http://localhost:3000';
+const BASE_URL = ' http://localhost:8080';
 
 // Función para registrar un nuevo usuario
 // Parámetros: name, email y password que provienen del formulario de registro
-export const registerUser = async (name, email, password) => {
+export const registerUser = async (username, email, password) => {
+  console.log({username, email, password})
   try {
-    const response = await fetch(`${BASE_URL}/register`, {
+    const response = await fetch(`${BASE_URL}/api/users/create`, {
       method: 'POST', // Método HTTP POST para enviar datos al servidor
       headers: {
         'Content-Type': 'application/json', // Tipo de contenido a enviar
       },
-      body: JSON.stringify({ name, email, password }), // Convertimos los datos a formato JSON
+      body: JSON.stringify({ username, email, password }), // Convertimos los datos a formato JSON
     });
     console.log(response)
 
@@ -39,7 +40,7 @@ export const registerUser = async (name, email, password) => {
 // Parámetros: email y password que provienen del formulario de login
 export const loginUser = async (email, password) => {
   try {
-    const response = await fetch(`${BASE_URL}/login`, {
+    const response = await fetch(`${BASE_URL}/api/users/login`, {
       method: 'POST', // Método HTTP POST para enviar los datos
       headers: {
         'Content-Type': 'application/json', // Tipo de contenido a enviar

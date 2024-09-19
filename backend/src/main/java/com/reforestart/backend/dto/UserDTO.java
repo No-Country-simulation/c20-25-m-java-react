@@ -13,9 +13,9 @@ public class UserDTO {
 
     private Long id;
     @NotBlank(message = "El nombre de usuario no puede estar vacío")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+      @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String username;
-
+    @NotBlank(message = "El email de usuario no puede estar vacío")
     private String email;
 
     @NotBlank(message = "La contraseña no puede estar vacía")
