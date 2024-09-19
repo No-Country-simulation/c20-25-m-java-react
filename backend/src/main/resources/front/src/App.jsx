@@ -7,6 +7,7 @@ import AccountRegister from "./views/accountRegister";
 import Login from "./views/login";
 import PlanTree from "./views/plantree";
 import { UserProvider } from './components/userContex'
+import QuestionFrequently from "./views/preguntasFrecuentes";
 
 
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/registro" element={<AccountRegister />} />
           <Route path="/login" element={<Login />} />
           <Route path="/plantree" element={<PlanTree />} />
+          <Route path="/preguntasfrecuentes" element={<QuestionFrequently />} />
           
         </Routes>
         </UserProvider>
