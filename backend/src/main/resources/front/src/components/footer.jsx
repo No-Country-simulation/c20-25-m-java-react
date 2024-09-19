@@ -34,7 +34,7 @@ const Footer = () => {
   <p><strong>Acerca de</strong></p>
   <div className="mt-4">
     <Link to="/nosotros" className="block hover:underline">Nosotros</Link>
-    <Link to="/question" className="block hover:underline">Preguntas frecuentes</Link>
+    <Link to="/preguntasfrecuentes" className="block hover:underline">Preguntas frecuentes</Link>
     <Link to="/plantree" className="block hover:underline">Planta</Link>
   </div>
 </div>
